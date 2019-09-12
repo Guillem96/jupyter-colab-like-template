@@ -1,0 +1,39 @@
+{% extends 'full.tpl'%}
+
+{% block html_head  %}
+{{ super() }}
+<style>
+  body, #notebook-container {
+    background: #212121;
+    box-shadow: none;
+  }
+  p {
+    color: whitesmoke;
+  }
+</style>
+{% endblock html_head %}
+
+{% block body %}
+<div style="background: #212121">
+  {{ super() }}
+</div>
+{% endblock body %}
+
+{% block any_cell  %}
+<div style="background: #383838; margin-top: 1em; padding: 1em; border: 1.5px solid black;">
+  {{ super() }}
+</div>
+
+{% endblock any_cell  %}
+
+{% block markdowncell  %}
+<div style="color:whitesmoke !important;">
+  {{ super() }}
+</div>
+{% endblock markdowncell  %}
+
+
+## change the appearance of execution count
+{% block in_prompt %}
+# [{{ cell.execution_count if cell.execution_count else ' ' }}]:
+{% endblock in_prompt %}
