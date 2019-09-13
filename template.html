@@ -2,13 +2,82 @@
 
 {% block html_head  %}
 {{ super() }}
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 <style>
   body, #notebook-container {
     background: #212121;
     box-shadow: none;
+    font-family: 'Roboto', 'Noto', sans-serif;
+    line-height: 1.4;
+    font-weight: 400;
+    font-size: 14px;
   }
-  p {
-    color: whitesmoke;
+
+  a, a:hover {
+    color: #42a5f5;
+  }
+
+  blockquote {
+    border-left: 5px solid #a1a1a1;
+  }
+  
+  .text_cell_render  {
+    color: #d5d5d5 !important;
+  }
+
+  .text_cell > .prompt {
+    min-width: 1em;
+  }
+
+  .output_text > pre {
+    color: #d5d5d5 !important;
+  }
+
+  .input_area, .highlight, code {
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .highlight > pre {
+    color: #d5d5d5 !important;
+    background: transparent !important;
+  }
+
+  code {
+    color: #d5d5d5 !important;
+  }
+
+  pre {
+    background: transparent !important;
+  }
+
+  pre > .c1 {
+    color: #6aa94f !important;
+    font-style: normal !important;
+  }
+
+  pre > .mi {
+    color: #b5cea8 !important;
+  }
+
+  pre > .o, pre > .nn {
+    color: #d5d5d5 !important;
+  }
+
+  pre > .nb, pre > .nf {
+    color: #dcdcaa !important;
+  }
+
+  pre > .s1, pre > .sd {
+    color: #ce9178 !important;
+  }
+
+  pre > .k, pre > .kn {
+    color: #c586c0 !important;
+  }
+
+  pre > .ow {
+    color: #82c6ff !important;
   }
 </style>
 {% endblock html_head %}
@@ -19,21 +88,38 @@
 </div>
 {% endblock body %}
 
+
 {% block any_cell  %}
-<div style="background: #383838; margin-top: 1em; padding: 1em; border: 1.5px solid black;">
+<div style="background: #383838; padding: .2em;">
   {{ super() }}
 </div>
-
 {% endblock any_cell  %}
 
-{% block markdowncell  %}
-<div style="color:whitesmoke !important;">
+{% block input_group  %}
+<div style="background: #212121; padding: 1em; margin: 0 1em;">
   {{ super() }}
 </div>
-{% endblock markdowncell  %}
+{% endblock input_group  %}
 
 
-## change the appearance of execution count
 {% block in_prompt %}
-# [{{ cell.execution_count if cell.execution_count else ' ' }}]:
+<div style="margin-right: .7em">
+    {%if cell.execution_count %}
+      <span style="color: #d5d5d5 !important;">[&nbsp;{{ cell.execution_count }}&nbsp;]</span>
+    {% else %}
+      <span style="color: #d5d5d5 !important;">[&nbsp;&nbsp;&nbsp;]</span>
+    {% endif %}
+</div>
 {% endblock in_prompt %}
+
+
+{% block output_area_prompt %}
+<div style="min-width: 3em;"></div>
+{% endblock output_area_prompt %}
+
+
+{% block execute_result %}
+<div style="background: #383838; width: 100%">
+  {{ super() }}
+</div>
+{% endblock execute_result %}
